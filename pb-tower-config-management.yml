@@ -1,6 +1,6 @@
 - name: Config Manage Platform
   hosts: tower
-  gather_facts: false
+  gather_facts: true
   run_once: true  # need this when you change localhost to the tower group
   tasks:
     - name: Install pip
