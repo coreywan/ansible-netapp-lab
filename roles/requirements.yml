@@ -1,0 +1,6 @@
+## patches were needed to the above. I have a PR out there (https://github.com/victorock/ansible-role-tower-config/pull/13)
+
+# - src: victorock.tower_config
+#   name: ansible-tower-config
+- src: https://github.com/coreywan/ansible-role-tower-config
+  name: ansible-tower-config

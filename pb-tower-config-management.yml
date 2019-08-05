@@ -1,0 +1,12 @@
+- name: Config Manage Platform
+  hosts: tower
+  gather_facts: false
+  run_once: true  # need this when you change localhost to the tower group
+  tasks:
+    - name: Install Ansible Tower CLI
+      pip:
+        name: ansible-tower-cli
+
+    - name: Build core configurations
+      include_role:
+        name: ansible-tower-config
