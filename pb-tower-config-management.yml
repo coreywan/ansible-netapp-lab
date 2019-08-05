@@ -10,6 +10,7 @@
     - name: Install Ansible Tower CLI
       pip:
         name: ansible-tower-cli
+        state: latest
 
     - name: Build core configurations
       include_role:
