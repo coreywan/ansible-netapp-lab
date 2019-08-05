@@ -131,7 +131,7 @@ tower_config:
           scm_credential: github
           scm_type: git
           scm_branch: master
-          scm_url: https://github.com/wwt/ansible-example.git
+          scm_url: https://github.com/coreywan/ansible-netapp-lab.git
         ## Project Options
         # name: "{{ tower_config_organization_project.name }}"
         # description: "{{ tower_config_organization_project.description | default(omit) }}"
