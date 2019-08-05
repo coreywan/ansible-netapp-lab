@@ -1,2 +1,2 @@
 [tower]
-ansible-tower ansible_host=10.253.3.150
+ansible-tower.example.com
