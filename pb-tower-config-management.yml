@@ -15,3 +15,7 @@
     - name: Build core configurations
       include_role:
         name: ansible-tower-config
+
+    - name: Install Mid Server
+      include_role:
+        name: ansible-role-mid

@@ -1,0 +1,213 @@
+---
+now_instance: dev59142.service-now.com
+
+tower_config:
+  host: ansible-tower.example.com:443
+  username: "admin"
+  password: !vault |
+    $ANSIBLE_VAULT;1.1;AES256
+    66633337386332633261383531343436326130333564666464613434343737313634383738313236
+    3433353137333362613939626633306133306339386438640a356263636237376463633534363762
+    62653939633062366438353463333235366666636332613632323630313338333231316236373938
+    6332393862623230370a643532653137323135626362646533366361356264386239373332616431
+    3639
+  verify_ssl: false
+
+  organization:
+    Default:
+      name: Default
+      users:
+        - name: snow
+          password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            66633337386332633261383531343436326130333564666464613434343737313634383738313236
+            3433353137333362613939626633306133306339386438640a356263636237376463633534363762
+            62653939633062366438353463333235366666636332613632323630313338333231316236373938
+            6332393862623230370a643532653137323135626362646533366361356264386239373332616431
+            3639
+          email: "snow@example.com"
+          first_name: SN
+          last_name: Automation
+          superuser: true
+          auditor: false
+        - name: poc-admin
+          password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            66633337386332633261383531343436326130333564666464613434343737313634383738313236
+            3433353137333362613939626633306133306339386438640a356263636237376463633534363762
+            62653939633062366438353463333235366666636332613632323630313338333231316236373938
+            6332393862623230370a643532653137323135626362646533366361356264386239373332616431
+            3639
+          email: poc-admin@example.com
+          superuser: true
+          auditor: false
+        - name: networkadmin1
+          password: networkadmin1
+          email: networkadmin1@example.com
+          superuser: false
+          auditor: false
+        - name: networkadmin2
+          password: networkadmin2
+          email: networkadmin2@example.com
+          superuser: false
+          auditor: false
+        - name: infadmin1
+          password: infadmin1
+          email: infadmin1@example.com
+          superuser: false
+          auditor: false
+        - name: infadmin2
+          password: infadmin2
+          email: infadmin2@example.com
+          superuser: false
+          auditor: false
+      teams:
+        - name: networkservices
+          description: "Network Services"
+          members:
+            - name: networkadmin1
+            - name: networkadmin2
+        - name: infrastructureservices
+          description: "Infrastructure Services"
+          members:
+            - name: infadmin1
+            - name: infadmin2
+      credentials:
+        - name: github
+          username: coreywan
+          password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            32373066333931386230303538623537393432333930373939376436373237343765656236353937
+            3839386261316137666465383634303930373339336263390a313539326164636364313433356465
+            64616634653335366438363231653566366539316539393563336333653764666235336565353738
+            6237393931333663380a313465616332616664396631343636336332623661616266316236323630
+            32303763323335356130663937623434396464373365376433363932323561366137323831383466
+            3730346366626466653235353365393334353037393462636361
+          kind: scm
+        - name: vault
+          kind: vault
+          vault_password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            66633337386332633261383531343436326130333564666464613434343737313634383738313236
+            3433353137333362613939626633306133306339386438640a356263636237376463633534363762
+            62653939633062366438353463333235366666636332613632323630313338333231316236373938
+            6332393862623230370a643532653137323135626362646533366361356264386239373332616431
+            3639
+
+
+        ## Credential Options
+        # name: "{{ tower_config_organization_credential.name }}"
+        # username: "{{ tower_config_organization_credential.username | default(omit) }}"
+        # password: "{{ tower_config_organization_credential.password | default(omit) }}"
+        # kind: "{{ tower_config_organization_credential.kind | default(omit) }}"
+        # organization: "{{ tower_config_organization.name | default(omit) }}"
+        # ssh_key_data: "{{ tower_config_organization_credential.ssh_key_data | default(omit) }}"
+        # ssh_key_unlock: "{{ tower_config_organization_credential.ssh_key_unlock | default(omit) }}"
+        # become_username: "{{ tower_config_organization_credential.become_username | default(omit) }}"
+        # become_password: "{{ tower_config_organization_credential.become_password | default(omit) }}"
+        # become_method: "{{ tower_config_organization_credential.become_method | default(omit) }}"
+        # secret: "{{ tower_config_organization_credential.secret | default(omit) }}"
+        # project: "{{ tower_config_organization_credential.project | default(omit) }}"
+        # authorize: "{{ tower_config_organization_credential.authorize | default(omit) }}"
+        # authorize_password: "{{ tower_config_organization_credential.authorize_password | default(omit) }}"
+        # vault_password: "{{ tower_config_organization_credential.vault_password | default(omit) }}"
+        # host: "{{ tower_config_organization_credential.host | default(omit) }}"
+        # domain: "{{ tower_config_organization_credential.domain | default(omit) }}"
+        # team: "{{ tower_config_organization_credential.team | default(omit) }}"
+        # tenant: "{{ tower_config_organization_credential.tenant | default(omit) }}"
+        # subscription: "{{ tower_config_organization_credential.subscription | default(omit) }}"
+        # client: "{{ tower_config_organization_credential.client | default(omit) }}"
+        # state: "{{ tower_config_organization_credential.state | default(omit) }}"
+      projects:
+        - name: ansible
+          description: General Ansible Code Repository
+          scm_credential: github
+          scm_type: git
+          scm_branch: master
+          scm_url: https://github.com/coreywan/ansible-netapp-lab.git
+        ## Project Options
+        # name: "{{ tower_config_organization_project.name }}"
+        # description: "{{ tower_config_organization_project.description | default(omit) }}"
+        # scm_credential: "{{ tower_config_organization_project.scm_credential }}"
+        # scm_type: "{{ tower_config_organization_project.scm_type | default(omit) }}"
+        # scm_branch: "{{ tower_config_organization_project.scm_branch | default(omit) }}"
+        # scm_update_on_launch: "{{ tower_config_organization_project.scm_update_on_launch | default(omit) }}"
+        # scm_delete_on_update: "{{ tower_config_organization_project.scm_delete_on_update | default(omit) }}"
+        # scm_clean: "{{ tower_config_organization_project.scm_clean | default(omit) }}"
+        # scm_url: "{{ tower_config_organization_project.scm_url | default(omit) }}"
+        # state: "{{ tower_config_organization_project.state | default(omit) }}"
+      inventories:
+        - name: localhost
+          state: present
+        - name: Demo Inventory
+          state: absent
+        ## Inventory Options
+        # name: "{{ tower_config_organization_inventory.name }}"
+        # organization: "{{ tower_config_organization.name }}"
+        # description: "{{ tower_config_organization_inventory.description | default(omit) }}"
+        # state: "{{ tower_config_organization_inventory.state | default(omit) }}"
+        # sources:
+        #   - name: "{{ tower_config_organization_inventory_source.name }}"
+        #     description: "{{ tower_config_organization_inventory_source.description | default(omit) }}"
+        #     state: "{{ tower_config_organization_inventory_source.state | default(omit) }}"
+        #     credential: "{{ tower_config_organization_inventory_source.credential | default(omit) }}"
+        #     group_by: "{{ tower_config_organization_inventory_source.group_by | default(omit) }}"
+        #     instance_filters: "{{ tower_config_organization_inventory_source.instance_filter | default(omit) }}"
+        #     overwrite: "{{ tower_config_organization_inventory_source.overwrite | default(omit) }}"
+        #     overwrite_vars: "{{ tower_config_organization_inventory_source.overwrite_vars | default(omit) }}"
+        #     source: "{{ tower_config_organization_inventory_source.source }}"
+        #     source_path: "{{ tower_config_organization_inventory_source.source_path | default(omit) }}"
+        #     source_project: "{{ tower_config_organization_inventory_source.source_project | default(omit) }}"
+        #     source_regions: "{{ tower_config_organization_inventory_source.source_regions | default(omit) }}"
+        #     source_script: "{{ tower_config_organization_inventory_source.source_script | default(omit) }}"
+        #     source_vars: "{{ tower_config_organization_inventory_source.source_vars | default(omit) }}"
+      job_templates:
+        - name: hello-world
+          playbook: pb-hello-world.yml
+          project: ansible
+          description: Generic Hello World Playbook
+          job_type: run
+          inventory: localhost
+          ask_extra_vars: true
+          ## Job Template Options
+          # name: "{{ tower_config_organization_job_template.name }}"
+          # playbook: "{{ tower_config_organization_job_template.playbook }}"
+          # project: "{{ tower_config_organization_job_template.project }}"
+          # description: "{{ tower_config_organization_job_template.description | default(omit) }}"
+          # job_type: "{{ tower_config_organization_job_template.job_type | default('run') }}"
+          # ask_job_type: "{{ tower_config_organization_job_template.ask_job_type | default(omit) }}"
+          # credential: "{{ tower_config_organization_job_template.credential | default(omit) }}"
+          # vault_credential: "{{ tower_config_organization_job_template.vault_credential | default(omit) }}"
+          # ask_credential: "{{ tower_config_organization_job_template.ask_credential | default(omit) }}"
+          # inventory: "{{ tower_config_organization_job_template.inventory }}"
+          # ask_inventory: "{{ tower_config_organization_job_template.ask_inventory | default(omit) }}"
+          # extra_vars_path: "{{ tower_config_organization_job_template.extra_vars_path | default(omit) }}"
+          # ask_extra_vars: "{{ tower_config_organization_job_template.ask_extra_vars | default(omit) }}"
+          # job_tags: "{{ tower_config_organization_job_template.job_tags | default(omit) }}"
+          # ask_tags: "{{ tower_config_organization_job_template.ask_tags | default(omit) }}"
+          # skip_tags: "{{ tower_config_organization_job_template.skip_tags | default(omit) }}"
+          # become_enabled: "{{ tower_config_organization_job_template.become_enabled | default(omit) }}"
+          # forks: "{{ tower_config_organization_job_template.forks | default(omit) }}"
+          # host_config_key: "{{ tower_config_organization_job_template.host_config_key | default(omit) }}"
+          # limit: "{{ tower_config_organization_job_template.limit | default(omit) }}"
+          # # ask_limit_on_launch: "{{ tower_config_organization_job_template.ask_limit_on_launch | default(omit) }}"
+          # verbosity: "{{ tower_config_organization_job_template.verbosity | default(omit) }}"
+          # state: "{{ tower_config_organization_job_template.state | default(omit) }}"
+      permissions: []
+      credential_types:
+        - name: ServiceNow
+          kind: cloud
+          description: The ability to post back to ServiceNow
+          inputs:
+            fields:
+              - type: string
+                id: username
+                label: Username
+              - type: string
+                id: password
+                label: Password
+                secret: true
+          injectors:
+            extra_vars:
+              snow_password: !unsafe "{{password}}"  # This forces the jinja in the string to not be enumerated.
+              snow_username: !unsafe "{{username}}"  # This forces the jinja in the string to not be enumerated.
