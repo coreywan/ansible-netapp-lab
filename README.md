@@ -19,3 +19,17 @@ Usage: `ansible-playbook  --ask-vault-pass -i inventories/poc/hosts pb-tower-con
 ### pb-hello-world.yml
 
 Description: A generic playbook to test Tower functionality and also used to test the Service-Now to Ansible Integration.
+
+
+
+
+### Temporary Docs to get everything going
+
+1. Open Terminal
+```
+cd /home/student/Projects
+rmdir ansible-netapp-lab
+git clone https://github.com/coreywan/ansible-netapp-lab.git
+cd ansible-netapp-lab
+ansible-playbook  --ask-vault-pass -i inventories/poc/hosts pb-tower-config-management.yml
+```
