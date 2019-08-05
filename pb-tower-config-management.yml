@@ -5,7 +5,7 @@
   tasks:
     - name: Install pip
       package:
-        name: pip
+        name: python-pip
 
     - name: Install Ansible Tower CLI
       pip:
