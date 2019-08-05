@@ -3,6 +3,10 @@
   gather_facts: false
   run_once: true  # need this when you change localhost to the tower group
   tasks:
+    - name: Install pip
+      package:
+        name: pip
+
     - name: Install Ansible Tower CLI
       pip:
         name: ansible-tower-cli
