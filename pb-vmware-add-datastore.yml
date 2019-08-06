@@ -19,6 +19,7 @@
         username: "{{netapp_username}}"
         password: "{{netapp_password}}"
         validate_certs: false
+        name: "{{datastore_name}}"
         junction_path: "/{{datastore_name}}"
         size: "{{datastore_size_gb}}"
         size_unit: gb
