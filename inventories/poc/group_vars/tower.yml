@@ -149,6 +149,11 @@ tower_config:
           state: present
         - name: Demo Inventory
           state: absent
+        - name: poc
+          state: present
+          source: scm
+          source_path: inventories/poc/hosts
+          source_project: ansible
         ## Inventory Options
         # name: "{{ tower_config_organization_inventory.name }}"
         # organization: "{{ tower_config_organization.name }}"
@@ -182,7 +187,7 @@ tower_config:
           project: ansible
           description: Add New VMWare datastore
           job_type: run
-          inventory: localhost
+          inventory: poc
           ask_extra_vars: true
           ## Job Template Options
           # name: "{{ tower_config_organization_job_template.name }}"
