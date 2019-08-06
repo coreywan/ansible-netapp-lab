@@ -1,6 +1,11 @@
+## Required Variables:
+    # datastore_name: 
+    # datastore_size_gb:
 - hosts: ontap
   gather_facts: false
   connection: local
+  vars:
+
   tasks:
     - name: Gather Netapp Facts
       na_ontap_gather_facts:
@@ -9,3 +14,17 @@
         username: "{{netapp_username}}"
         password: "{{netapp_password}}"
         validate_certs: false
+
+    - name: Provision Volume
+      na_ontap_volume:
+        hostname: "{{netapp_hostname}}"
+        username: "{{netapp_username}}"
+        password: "{{netapp_password}}"
+        validate_certs: false
+        junction_path: "/{{datastore_name}}"
+        size: "{{datastore_size_gb}}"
+        size_unit: gb
+        vserver: vsphere
+        policy: vsphere
+        space_guarantee: none
+        aggregate_name: aggr1_FCAL_n01
