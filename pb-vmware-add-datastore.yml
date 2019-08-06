@@ -43,3 +43,5 @@
         state: present
         nfs_server: 192.168.3.110
         nfs_path: "/{{datastore_name}}"
+        datastore_name: "{{datastore_name}}"
+        datastore_type: nfs
