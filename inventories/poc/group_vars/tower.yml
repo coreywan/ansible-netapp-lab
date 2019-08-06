@@ -191,6 +191,7 @@ tower_config:
           job_type: run
           inventory: poc
           ask_extra_vars: true
+          vault_credentials: vault
           ## Job Template Options
           # name: "{{ tower_config_organization_job_template.name }}"
           # playbook: "{{ tower_config_organization_job_template.playbook }}"
