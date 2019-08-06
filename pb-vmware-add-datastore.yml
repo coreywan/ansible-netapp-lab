@@ -5,3 +5,7 @@
     - name: Gather Netapp Facts
       na_ontap_gather_facts:
         state: info
+        hostname: "{{netapp_hostname}}"
+        username: "{{netapp_username}}"
+        password: "{{netapp_password}}"
+        validate_certs: false
