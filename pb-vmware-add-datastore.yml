@@ -27,3 +27,19 @@
         policy: vsphere
         space_guarantee: none
         aggregate_name: aggr1_FCAL_n01
+
+- hosts: vsphere
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Mount Volume as datastore_name
+      vmware_host_datastore:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+        datacenter_name: WWTATC
+        esxi_hostname: "{{inventory_hostname}}"
+        state: present
+        nfs_server: 192.168.3.110
+        nfs_path: "/{{datastore_name}}"
