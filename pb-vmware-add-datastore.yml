@@ -4,8 +4,6 @@
 - hosts: ontap
   gather_facts: false
   connection: local
-  vars:
-
   tasks:
     - name: Gather Netapp Facts
       na_ontap_gather_facts:
