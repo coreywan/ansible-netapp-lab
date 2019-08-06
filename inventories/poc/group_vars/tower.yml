@@ -151,9 +151,11 @@ tower_config:
           state: absent
         - name: poc
           state: present
-          source: scm
-          source_path: inventories/poc/hosts
-          source_project: ansible
+          sources:
+            - name: poc
+              source: scm
+              source_path: inventories/poc/hosts
+              source_project: ansible
         ## Inventory Options
         # name: "{{ tower_config_organization_inventory.name }}"
         # organization: "{{ tower_config_organization.name }}"
