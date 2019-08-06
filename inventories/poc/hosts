@@ -1,2 +1,5 @@
 [tower]
 ansible-tower.example.com
+
+[ontap]
+na-cluster1.example.com
