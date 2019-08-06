@@ -5,6 +5,3 @@
     - name: Gather Netapp Facts
       na_ontap_gather_facts:
         state: info
-        gather_subset:
-          - "volume_info"
-
