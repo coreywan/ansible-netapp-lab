@@ -10,7 +10,7 @@ now_instance_password: !vault |
     3639
 
 tower_config:
-  host: ansible-tower.example.com:443
+  host: ansible-tower-web-svc-tower.apps.example.com:443
   username: "admin"
   password: !vault |
     $ANSIBLE_VAULT;1.1;AES256
