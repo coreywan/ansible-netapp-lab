@@ -1,6 +1,3 @@
-## Required Variables:
-    # datastore_name: 
-    # datastore_size_gb:
 - hosts: ontap
   gather_facts: false
   connection: local
