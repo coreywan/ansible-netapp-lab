@@ -24,7 +24,7 @@
         size: "{{datastore_size_gb}}"
         size_unit: gb
         vserver: vsphere
-        policy: vsphere
+        policy: default
         space_guarantee: none
         aggregate_name: na_cluster1_01_FC_1
 
