@@ -198,7 +198,7 @@ tower_config:
           description: Configure VMWare datastore from IaC
           job_type: run
           inventory: poc
-          ask_extra_vars: true
+          ask_extra_vars: false
           vault_credentials: vault
           ## Job Template Options
           # name: "{{ tower_config_organization_job_template.name }}"
