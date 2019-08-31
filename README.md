@@ -28,7 +28,8 @@ Description: A generic playbook to test Tower functionality and also used to tes
 sudo su -
 # The below is because rhel's ansible version doesn't have a fix for one of the ansible jobs.
 yum remove -y ansible
-yum install -y pip
+yum install -y python3-pip
+pip install ansible
 exit
 cd /home/student/Projects
 rmdir ansible-netapp-lab
