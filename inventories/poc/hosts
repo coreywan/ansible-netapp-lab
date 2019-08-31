@@ -1,5 +1,5 @@
 [tower]
-ansible-tower.example.com
+ansible-tower-web-svc-tower.apps.example.com
 
 [ontap]
 na-cluster1.example.com
