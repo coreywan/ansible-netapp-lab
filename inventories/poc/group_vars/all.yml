@@ -12,3 +12,5 @@ ansible_ssh_pass: !vault |
 datastores:
   - name: iac_ds1
     size_gb: 10
+  - name: iac_ds2
+    size_gb: 10
