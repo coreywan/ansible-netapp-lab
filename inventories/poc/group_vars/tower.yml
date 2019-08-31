@@ -192,6 +192,14 @@ tower_config:
           inventory: poc
           ask_extra_vars: true
           vault_credentials: vault
+        - name: vmware-add-datastore-iac
+          playbook: pb-vmware-add-datastore-iac.yml
+          project: ansible
+          description: Configure VMWare datastore from IaC
+          job_type: run
+          inventory: poc
+          ask_extra_vars: true
+          vault_credentials: vault
           ## Job Template Options
           # name: "{{ tower_config_organization_job_template.name }}"
           # playbook: "{{ tower_config_organization_job_template.playbook }}"

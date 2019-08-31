@@ -1,0 +1,49 @@
+## Required Variables:
+    # datastore_name: 
+    # datastore_size_gb:
+- hosts: ontap
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Gather Netapp Facts
+      na_ontap_gather_facts:
+        state: info
+        hostname: "{{netapp_hostname}}"
+        username: "{{netapp_username}}"
+        password: "{{netapp_password}}"
+        validate_certs: false
+
+    - name: Provision Volume
+      na_ontap_volume:
+        hostname: "{{netapp_hostname}}"
+        username: "{{netapp_username}}"
+        password: "{{netapp_password}}"
+        validate_certs: false
+        name: "{{ item.name }}"
+        junction_path: "/{{ item.name }}"
+        size: "{{ item.size_gb }}"
+        size_unit: gb
+        vserver: vsphere
+        policy: vsphere
+        space_guarantee: none
+        aggregate_name: aggr1_FCAL_n01
+      with_items: "{{ datastores }}"
+
+- hosts: vsphere
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Mount Volume as datastore_name
+      vmware_host_datastore:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+        datacenter_name: WWTATC
+        esxi_hostname: "{{inventory_hostname}}"
+        state: present
+        nfs_server: 192.168.3.110
+        nfs_path: "/{{item.name}}"
+        datastore_name: "{{item.name}}"
+        datastore_type: nfs
+      with_items: "{{ datastores }}"
