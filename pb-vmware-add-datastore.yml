@@ -26,7 +26,7 @@
         vserver: vsphere
         policy: vsphere
         space_guarantee: none
-        aggregate_name: aggr1_FCAL_n01
+        aggregate_name: na_cluster1_01_FC_1
 
 - hosts: vsphere
   gather_facts: false
