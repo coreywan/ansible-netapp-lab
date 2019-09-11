@@ -1,21 +1,20 @@
-- name: Config Manage Platform
-  hosts: tower
-  gather_facts: true
-  run_once: true  # need this when you change localhost to the tower group
+- name: Config Manage Jumpbox
+  hosts: localhost
   tasks:
-    - name: Install pip
-      package:
-        name: python-pip
-
     - name: Install Ansible Tower CLI
       pip:
         name: ansible-tower-cli
         state: latest
-
     - name: Install Mid Server
       include_role:
         name: ansible-role-mid
 
+- name: Config Manage Platform
+  hosts: tower
+  connection: local
+  gather_facts: false
+  run_once: true  # need this when you change localhost to the tower group
+  tasks:
     - name: Build core configurations
       include_role:
         name: ansible-tower-config
