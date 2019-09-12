@@ -1,3 +1,5 @@
+jumpbox
+
 [tower]
 ansible-tower-web-svc-tower.apps.example.com
 

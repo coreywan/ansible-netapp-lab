@@ -1,5 +1,6 @@
 - name: Config Manage Jumpbox
-  hosts: localhost
+  hosts: jumpbox
+  become: true
   tasks:
     - name: Install Ansible Tower CLI
       pip:
