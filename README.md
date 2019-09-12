@@ -25,17 +25,11 @@ Description: A generic playbook to test Tower functionality and also used to tes
 
 1. Open Terminal
 ```
-sudo su -
-# The below is because rhel's ansible version doesn't have a fix for one of the ansible jobs.
-yum remove -y ansible
-yum install -y python3-pip
-pip install ansible
-exit
 cd /home/student/Projects
 rmdir ansible-netapp-lab
 git clone https://github.com/coreywan/ansible-netapp-lab.git
 cd ansible-netapp-lab
-sudo ansible-galaxy install -r ./roles/requirements.yml
+ansible-galaxy install -r ./roles/requirements.yml -p ./roles
 ansible-playbook  --ask-vault-pass -i inventories/poc/hosts pb-tower-config-management.yml
 
 ```
