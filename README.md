@@ -24,7 +24,7 @@ Description: A generic playbook to test Tower functionality and also used to tes
 ### Temporary Docs to get everything going
 
 1. Open Terminal
-```
+```sh
 cd /home/student/Projects
 rmdir ansible-netapp-lab
 git clone https://github.com/coreywan/ansible-netapp-lab.git
