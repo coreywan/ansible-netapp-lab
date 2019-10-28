@@ -23,7 +23,7 @@ Description: A generic playbook to test Tower functionality and also used to tes
 
 ### Temporary Docs to get everything going
 
-1. Open Terminal
+1. Open Terminal and setup the configuration of the environment
 ```sh
 cd /home/student/Projects
 rmdir ansible-netapp-lab
@@ -31,5 +31,11 @@ git clone https://github.com/coreywan/ansible-netapp-lab.git
 cd ansible-netapp-lab
 ansible-galaxy install -r ./roles/requirements.yml -p ./roles
 ansible-playbook  --ask-vault-pass -i inventories/poc/hosts pb-tower-config-management.yml
-
+```
+2. Enable http on the netapp cluster
+```sh
+[student@jumpbox ansible-netapp-lab]$ ssh admin@na-cluster1
+na-cluster1::> set adv
+na-cluster1::*> system services web modify -http-enabled true
+system services web modify -http-enabled true
 ```
