@@ -9,3 +9,7 @@ na-cluster1.example.com
 [vsphere]
 esxi1.example.com
 esxi2.example.com
+
+[infoblox]
+infoblox.example.com
+

@@ -1,0 +1,65 @@
+- hosts: infoblox
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Make Sure We Can Connect to Infoblox with a generic query
+      assert:
+        that: |
+          lookup('nios', 'networkview', provider=infoblox_provider)
+        msg: "Unable to connect to the Infoblox API"
+      when: tests.infoblox.connection | default(false) == true
+
+    - name: Perform NIOS Host Record Checks
+      assert:
+        that: |
+          (lookup('nios', 'record:host',
+            filter={'name': rec.name}, 
+            provider=infoblox_provider))['_ref'] is defined
+        msg: "{{rec.name}} does not exist in infoblox"
+      loop: "{{ tests.infoblox.host_record_exists | default([]) }}"
+      loop_control:
+        loop_var: rec
+        label: "{{ rec.name }}"
+
+- hosts: ontap
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Gather Netapp Facts
+      na_ontap_gather_facts:
+        state: info
+        hostname: "{{netapp_hostname}}"
+        username: "{{netapp_username}}"
+        password: "{{netapp_password}}"
+        validate_certs: false
+      when: tests.ontap.connection | default(false)
+
+- hosts: tower
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Test API Connectivity
+      uri:
+        url: "https://{{tower_config.host}}/api/v2/me/"
+        method: GET
+        user: "{{ tower_config.username }}"
+        password: "{{ tower_config.password }}"
+        status_code: 200
+        validate_certs: "{{ tower_config.verify_ssl | default(false) }}"
+        force_basic_auth: true
+      delegate_to: localhost
+      ignore_errors: true
+      when: tests.tower.connection | default(false)
+
+- hosts: vsphere
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Test ESXi Connectivity
+      vmware_host_facts:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+        esxi_hostname: "{{inventory_hostname}}"
+      when: tests.vsphere.host_connection | default(false)
